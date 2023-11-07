@@ -36,7 +36,6 @@ for ($i = 1; $i <= 200; $i++) {
     $conn->query($sql);
 }
 
-
 $conn->close();
 
 echo "Fake data has been loaded into the database.";
