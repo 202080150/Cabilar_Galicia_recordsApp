@@ -10,13 +10,13 @@ if (isset($_GET['id'])) {
     $student = new Student($db);
     $studentData = $student->read($id); // Implement the read method in the Student class
 
-    if ($studentData) {
-        // The student data is retrieved, and you can pre-fill the edit form with this data.
-    } else {
+    if (!$studentData) {
         echo "Student not found.";
+        exit(); // Exit if student not found
     }
 } else {
     echo "Student ID not provided.";
+    exit(); // Exit if student ID not provided
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -34,15 +34,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $student = new Student($db);
 
     // Call the edit method to update the student data
-    if ($student->update($id, $data)) {
-        echo "Record updated successfully.";
-    } else {
-        echo "Failed to update the record.";
+    try {
+        if ($student->update($id, $data)) {
+            echo "Record updated successfully.";
+        } else {
+            echo "Failed to update the record.";
+        }
+    } catch (PDOException $e) {
+        echo "Database Error: " . $e->getMessage();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
     }
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,31 +61,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include('../includes/navbar.php'); ?>
 
     <div class="content">
-    <h2>Edit Student Information</h2>
-    <form action="" method="post">
-        <input type="hidden" name="id" value="<?php echo $studentData['id']; ?>">
-        
-        <label for="student_number">Student Number:</label>
-        <input type="text" name="student_number" id="student_number" value="<?php echo $studentData['student_number']; ?>">
-        
-        <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" id="first_name" value="<?php echo $studentData['first_name']; ?>">
-        
-        <label for="middle_name">Middle Name:</label>
-        <input type="text" name= "middle_name" id="middle_name" value="<?php echo $studentData['middle_name']; ?>">
-        
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" id="last_name" value="<?php echo $studentData['last_name']; ?>">
-        
-        <label for="gender">Gender:</label>
-        <input type="text" name="gender" id="gender" value="<?php echo $studentData['gender']; ?>">
-        
-        <label for="birthday">Birthdate:</label>
-        <input type="text" name="birthday" id="birthday" value="<?php echo $studentData['birthday']; ?>">
-        
-        <input type="submit" value="Update">
-    </form>
+        <h2>Edit Student Information</h2>
+        <form action="" method="post">
+            <input type="hidden" name="id" value="<?php echo $studentData['id']; ?>">
+            
+            <label for="student_number">Student Number:</label>
+            <input type="text" name="student_number" id="student_number" value="<?php echo $studentData['student_number']; ?>">
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" id="first_name" value="<?php echo $studentData['first_name']; ?>">
+            
+            <label for="middle_name">Middle Name:</label>
+            <input type="text" name="middle_name" id="middle_name" value="<?php echo $studentData['middle_name']; ?>">
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" id="last_name" value="<?php echo $studentData['last_name']; ?>">
+            
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="Male" <?php echo ($studentData['gender'] === 'Male') ? 'selected' : ''; ?>>Male</option>
+                <option value="Female" <?php echo ($studentData['gender'] === 'Female') ? 'selected' : ''; ?>>Female</option>
+                <!-- Add more options as needed -->
+            </select>
+            
+            <label for="birthday">Birthdate:</label>
+            <input type="date" name="birthday" id="birthday" value="<?php echo $studentData['birthday']; ?>">
+            
+            <input type="submit" value="Update">
+        </form>
     </div>
+
+    <!-- Include the footer -->
     <?php include('../templates/footer.html'); ?>
 </body>
 </html>
