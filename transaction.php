@@ -30,7 +30,7 @@
     $results_per_page = 10;
     
     //find the total number of results/rows stored in database
-    $query = "SELECT *FROM transaction";
+    $query = "SELECT * FROM transaction";
     $result = mysqli_query($conn, $query);
     $number_of_result = mysqli_num_rows($result);
 
