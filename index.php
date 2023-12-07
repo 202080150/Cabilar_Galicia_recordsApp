@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -20,47 +20,47 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
-<!--
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
+            <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
         Tip 2: you can also add an image using data-image tag
     -->
             <div class="sidebar-wrapper">
-                <?php include('includes/sidebar.php'); ?>
-                <!--  <div class="logo">
-                    <a href="javascript:;" class="simple-text">
-                      Your Logo
-                    </a>
-                </div>
-                <ul class="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="dashboard.html">
-                            <i class="nc-icon nc-icon nc-paper-2"></i>
-                            <p>First example</p>
+                    <?php include('includes/sidebar.php') ?>
+                    <!--
+                    <div class="logo">
+                        <a href="javascript:;" class="simple-text">
+                        Your Logo
                         </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="./user.html">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Second example</p>
-                        </a>
-                    </li>
+                    </div>
+                    <ul class="nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="dashboard.html">
+                                <i class="nc-icon nc-icon nc-paper-2"></i>
+                                <p>First example</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="./user.html">
+                                <i class="nc-icon nc-bell-55"></i>
+                                <p>Second example</p>
+                            </a>
+                        </li>
 
-                    <li class="nav-item active active-pro">
-                        <a class="nav-link active" href="javascript:;">
-                            <i class="nc-icon nc-alien-33"></i>
-                            <p>Upgrade plan</p>
-                        </a>
-                    </li>
-                </ul> 
-            -->
+                        <li class="nav-item active active-pro">
+                            <a class="nav-link active" href="javascript:;">
+                                <i class="nc-icon nc-alien-33"></i>
+                                <p>Upgrade plan</p>
+                            </a>
+                        </li>
+                    </ul> -->
             </div>
         </div>
         <div class="main-panel">
-        <?php include('includes/navbar.php'); ?>
+            <?php include('includes/navbar.php') ?>
             <!-- Navbar -->
-           <!-- <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+            <!-- <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#pablo">Template</a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,82 +129,6 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="section">
-                    <div class = "row"> 
-                <div class="col-md-12">
-                            <div class="card strpied-tabled-with-hover">
-                            <br/>
-                                <div class="col-md-12"> 
-                                <a href = "/employee-add.php "> 
-                                    <button type= "submit" class = "btn btn-info btn-fill pull-right">Add New Employee</button>
-                                </a>
-                                </div>
-                                <div class="card-header ">
-                                    <h4 class="card-title">Striped Table with Hover</h4>
-                                    <p class="card-category">Here is a subtitle for this table</p>
-                                </div>
-                                <div class="card-body table-full-width table-responsive">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                            <th>Name</th>
-                                            <th>Contact Number</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                            <th>City</th>
-                                            
-                                        </thead>
-                                        <tbody>
-                                            
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>$36,738</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
-                                            </tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>$63,542</td>
-                                                <td>Malawi</td>
-                                                <td>Feldkirchen in Kärnten</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>$78,615</td>
-                                                <td>Chile</td>
-                                                <td>Gloucester</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                </div> 
-
-                </div>
-            </div>
                     </div>
                 </div>
             </div>
@@ -243,7 +167,6 @@
                     </nav>
                 </div>
             </footer>
-        </div>
     </div>
     <!--   -->
     <!-- <div class="fixed-plugin">
@@ -281,22 +204,22 @@
 
             <li class="active">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-1.jpg" alt="" />
+                    <img src="assets/img/sidebar-1.jpg" alt="" />
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-3.jpg" alt="" />
+                    <img src="assets/img/sidebar-3.jpg" alt="" />
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="..//assets/img/sidebar-4.jpg" alt="" />
+                    <img src=".assets/img/sidebar-4.jpg" alt="" />
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="../assets/img/sidebar-5.jpg" alt="" />
+                    <img src="assets/img/sidebar-5.jpg" alt="" />
                 </a>
             </li>
 

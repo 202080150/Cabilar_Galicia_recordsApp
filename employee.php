@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -19,72 +19,70 @@
 </head>
 
 <body>
-<?php
-    require('config/config.php');
-    require('config/db.php');
+    <?php
+        include_once('config.php');
+        include_once('db.php');
 
-     //define the number of results you want per age\
-     $results_per_page = 25;
-    
-     //find the total number of results/rows stored in database
-     $query = "SELECT * FROM employee";
-     $result = mysqli_query($conn, $query);
-     $number_of_result = mysqli_num_rows($result);
- 
-     //determine the total number of pages available 
-     $number_of_page = ceil($number_of_result / $results_per_page);
- 
-     //determine which page number visitor is currently on
-     if(!isset($_GET['page'])){
-         $page = 1;
-     }else{
-         $page = $_GET['page'];
-     }
- 
-     //determine the sql limit starting for the number of results on the display page 
-     $page_per_result = ($page-1) * $results_per_page;
+        // define Total number of results you want per page
+        $results_per_page = 21;
 
+        // Find the total number of results/rows stored in the database
+        $query = "SELECT * FROM employee";
+        $result = mysqli_query($conn, $query);
+        $number_of_result = mysqli_num_rows($result);
 
-    //create query
-    $query = 'SELECT employee.id, employee.lastname, employee.firstname, employee.address, office.name as office_name 
-    FROM employee, office 
-    Where employee.office_id = office.id ORDER BY employee.lastname LIMIT '. $page_per_result . ',' . $results_per_page;
+        //determine the total number of pages available
+        $number_of_page = ceil($number_of_result / $results_per_page);
 
-    //get the result
-    $result = mysqli_query($conn, $query);
+        // determine which page number visitor is currently on
+        if(!isset($_GET['page'])){
+            $page = 1;
+        }else{
+            $page = $_GET['page'];
+        }
 
-    //fetch the data
-    $employees = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        //determine the sql LIMIT starting number for the results on the display page
+        $page_first_result = ($page-1) * $results_per_page;
 
-    //free result
-    mysqli_free_result($result);
+        //Create Query
+        $query = 'SELECT employee.id, employee.lastname, employee.firstname, employee.office_id, employee.address, office.name AS office_name FROM recordsapp.employee, recordsapp.office WHERE employee.office_id = office.id ORDER BY employee.lastname LIMIT '. $page_first_result . ',' . $results_per_page;
 
-    //Close the connection
-    mysqli_close($conn);
-?>
+        // Get the result
+        $result = (mysqli_query($conn,$query));
+
+        // Fetch the data
+        $employees = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        // Free result
+        mysqli_free_result($result);
+
+        //Close the connection
+        mysqli_close($conn);
+
+    ?>
+
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-            <div class="sidebar-wrapper">
-                <?php include('includes/sidebar.php'); ?>
-
-            </div>
+        Tip 2: you can also add an image using data-image tag-->
+        <div class="sidebar-wrapper">
+                <?php include('includes/sidebar.php') ?>
+        </div>
         </div>
         <div class="main-panel">
-        <?php include('includes/navbar.php'); ?>
-            
+            <?php include('includes/navbar.php') ?>
             <div class="content">
                 <div class="container-fluid">
-                    <div class="section">
-                    </div>
-                        <div class = "row"> 
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
                             <br/>
-                                <div class="col-md-12"> 
-                                <a href = "/employee-add.php "> 
-                                    <button type= "submit" class = "btn btn-info btn-fill pull-right">Add New Employee</button>
-                                </a>
+                                <div class="col-md-12">
+                                    <a href="/employee-add.php">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add New Employee</button>
+                                    </a>
                                 </div>
                                 <div class="card-header ">
                                     <h4 class="card-title">Employees</h4>
@@ -93,41 +91,43 @@
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover table-striped">
                                         <thead>
-                                            <th>Last name</th>
-                                            <th>First name</th>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            <th>Office Name</th>
                                             <th>Address</th>
-                                            <th>Office</th>
                                             <th>Action</th>
-                                            
                                         </thead>
                                         <tbody>
-                                            <?php foreach($employees as $employee):  ?>
-                                           
-                                            <tr>
-                                                <td><?php echo $employee ['lastname']; ?></td>
-                                                <td><?php echo $employee ['firstname']; ?></td>
-                                                <td><?php echo $employee ['address']; ?></td>
-                                                <td><?php echo $employee ['office_name']; ?></td>
-                                                <!-- <td><?php echo $employee ['action']; ?></td> -->
-                                                <td> 
-                                                    <a href="/employee-edit.php?id=<?php echo $employee['id']; ?> ">
-                                                    <button type = "submit" class ="btn btn-warning btn-fill pull-right">Edit</button>
+                                            <?php foreach ($employees as $employee) : ?>
+                                            <tr>      
+                                                <td><?php echo $employee['lastname'] ?></td>         
+                                                <td><?php echo $employee['firstname'] ?></td>         
+                                                <td><?php echo $employee['office_name'] ?></td>              
+                                                <td><?php echo $employee['address'] ?></td>         
+                                                <td>
+                                                    <a href="/employee-edit.php?id=<?php echo $employee['id']; ?>">
+                                                        <button type="submit" class="btn btn-warning btn-fill pull-right">Edit</button>
                                                     </a>
-                                                </td>
+                                                </td>               
                                             </tr>
-                                            <tr>
                                             <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                </div> 
-                <?php
+                    </div>
+                    <?php
                         for($page=1; $page <= $number_of_page; $page++){
-                            echo '<a href = "employee.php?page='. $page.'">' . $page . '</a>';
+                            echo '<a href = "employee.php?page='. $page .'">' . $page . '</a>';
                         }
-                        ?>
+                    ?>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="section">
+                    </div>
                 </div>
             </div>
             <footer class="footer">
@@ -166,8 +166,6 @@
                 </div>
             </footer>
         </div>
-    </div>
-  
 </body>
 <!--   Core JS Files   -->
 <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -187,3 +185,4 @@
 <script src="assets/js/demo.js"></script>
 
 </html>
+
